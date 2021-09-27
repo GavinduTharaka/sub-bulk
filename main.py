@@ -21,8 +21,7 @@ def start(message):
     try:
         global channel_username
         count = 0
-        sphrase = 1
-        for sphrase in range(901):
+        for sphrase in range(1,399):
             url1 = "https://www.baiscopelk.com/category/සිංහල-උපසිරැසි/චිත්%e2%80%8dරපටි/page/" + str(sphrase) + "/"
             r1 = requests.get(url1)
             print(r1)
