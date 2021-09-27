@@ -2,9 +2,9 @@ import requests, bs4, time, os
 from colorama import Fore, init
 from bs4 import BeautifulSoup as bSoup
 import telebot
-channel_username = ""
+channel_username = "@uchksdhgckuds"
 Download_from = ""
-TOKEN = "2041643747:AAGPbbPC8s8kwhTikeomj0HQ-4a_3hkIU4E"
+TOKEN = "2041643747:AAHR4SIb68XwULgASf1RfU-BQocjNDsCx7k"
 bot = telebot.TeleBot(TOKEN)
 import urllib.parse
 
@@ -23,7 +23,7 @@ def start(message):
         count = 0
         sphrase = 1
         for sphrase in range(901):
-            url1 = "https://www.baiscopelk.com/category/%E0%B7%83%E0%B7%92%E0%B6%82%E0%B7%84%E0%B6%BD-%E0%B6%8B%E0%B6%B4%E0%B7%83%E0%B7%92%E0%B6%BB%E0%B7%90%E0%B7%83%E0%B7%92/%E0%B6%A0%E0%B7%92%E0%B6%AD%E0%B7%8A%e2%80%8d%E0%B6%BB%E0%B6%B4%E0%B6%A7%E0%B7%92" + str(sphrase) + "/"
+            url1 = "https://www.baiscopelk.com/category/සිංහල-උපසිරැසි/චිත්%e2%80%8dරපටි/page/" + str(sphrase) + "/"
             r1 = requests.get(url1)
             print(r1)
 
