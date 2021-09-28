@@ -15,9 +15,11 @@ def urldecode(str):
   return urllib.parse.unquote(str)
 
 def subdownloader(start,end,url0,channel_username,user_id):
+   count = 0
     try:
-        count = 0
         for sphrase in range(start, end+1):
+            bot.send_message(user_id, "page No : "+str(sphrase))
+          
             url1 = str(url0) + str(sphrase) + "/"
             r1 = requests.get(url1)
             print(r1)
@@ -103,7 +105,7 @@ def subdownloader(start,end,url0,channel_username,user_id):
                 except Exception as a :
                     sv = urldecode(linkl[n - 1]) + ".zip File is missing"
                     bot.send_message(user_id, str(sv))
-            bot.send_message(user_id, "Dounloaded Count : " + str(count))
+            bot.send_message(user_id, "Download Count: " + str(count))
 
     except Exception as e:
         bot.send_message(user_id, "Error : " + str(e))
