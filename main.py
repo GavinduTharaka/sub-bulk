@@ -97,6 +97,7 @@ def subdownloader(start, end, url0, channel_username, user_id):
                             count = count + 1
                         except:
                             print("File Was removed")
+                        time.sleep(3)
                     else:
                         print("Something went wrong !  Error code ", r3.status_code)
                         fE = open("errors.txt", "a")
@@ -107,7 +108,7 @@ def subdownloader(start, end, url0, channel_username, user_id):
                 except Exception as a:
                     sv = urldecode(linkl[n - 1]) + ".zip File is missing"
                     bot.send_message(user_id, str(sv))
-            bot.send_message(user_id, "Dounloaded Count : " + str(count))
+            bot.send_message(user_id, "Download Count : " + str(count))
 
     except Exception as e:
         bot.send_message(user_id, "Error : " + str(e))
@@ -117,7 +118,7 @@ def subdownloader(start, end, url0, channel_username, user_id):
 def start(message):
     user_id = message.chat.id
     url0 = "https://www.baiscopelk.com/category/සිංහල-උපසිරැසි/චිත්%e2%80%8dරපටි/page/"
-    subdownloader(46, 398, url0, "@uchksdhgckuds", user_id)
+    subdownloader(1, 398, url0, "@dfdvdvfdfdv", user_id)
 
 
 #    url10 = "https://www.baiscopelk.com/category/tv/page/"
