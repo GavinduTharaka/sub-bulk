@@ -2,7 +2,6 @@ import requests, bs4, time, os
 from colorama import Fore, init
 from bs4 import BeautifulSoup as bSoup
 import telebot
-channel_username = "@uchksdhgckuds"
 Download_from = ""
 TOKEN = "2041643747:AAHR4SIb68XwULgASf1RfU-BQocjNDsCx7k"
 bot = telebot.TeleBot(TOKEN)
@@ -15,14 +14,11 @@ def urlencode(str):
 def urldecode(str):
   return urllib.parse.unquote(str)
 
-@bot.message_handler(commands=['start'])
-def start(message):
-    user_id = message.chat.id
+def subdownloader(start,end,url0,channel_username,user_id):
     try:
-        global channel_username
         count = 0
-        for sphrase in range(1,399):
-            url1 = "https://www.baiscopelk.com/category/සිංහල-උපසිරැසි/චිත්%e2%80%8dරපටි/page/" + str(sphrase) + "/"
+        for sphrase in range(start, end+1):
+            url1 = str(url0) + str(sphrase) + "/"
             r1 = requests.get(url1)
             print(r1)
 
@@ -67,42 +63,56 @@ def start(message):
             for j in range(y):
                 n = j + 1
                 print("\nYou choosed >> ", linkl[n - 1])
+
                 url2 = links[n - 1]
-                r2 = requests.get(url2)
-                data2 = r2.text
-                page_soup2 = bSoup(data2, "html.parser")
-                html2 = page_soup2.find_all("a", {"style": "color: #ff3300;"})
-                page_soup2 = bSoup(data2, "html.parser")
-                ziplink = html2[0]['href']
-                html2 = page_soup2.find_all("a", {"style": "color: #ff3300;"})
-                url3 = ziplink  # "https://www.baiscopelk.com/Downloads/scooby-doo-the-sword-and-the-scoob-2021-1-zip/ (C) Copyright (R) GH0$TH4CKR"
-                r3 = requests.get(url3)
-                if r3.status_code == 200:
-                    sv = urldecode(linkl[n - 1]) + ".zip"
-                    file = open(sv, "wb")
-                    file.write(r3.content)
-                    file.close()
-                    print("File download success !")
-                    doc = open(sv, 'rb')
-                    caption = str(sv)
-                    bot.send_document(channel_username, doc, caption=caption)
-                    print(sv, "Send file")
-                    count = count + 1
-                    doc.close()
-                    try:
-                        os.remove(sv)
-                        print("Downloaded File Removed")
-                    except:
-                        print("File Was removed")
-                    act = 0
-                else:
-                    print("Something went wrong !  Error code ", r3.status_code)
-                    fE = open("errors.txt", "a")
-                    fE.write("Error code " + str(r3.status_code) + "\n")
-                    fE.close()
-                    bot.send_message(user_id, "Something went wrong !\nError code " + str(
-                        r3.status_code) + "\n")
+                try :
+                    r2 = requests.get(url2)
+                    data2 = r2.text
+                    page_soup2 = bSoup(data2, "html.parser")
+                    html2 = page_soup2.find_all("a", {"style": "color: #ff3300;"})
+                    page_soup2 = bSoup(data2, "html.parser")
+                    ziplink = html2[0]['href']
+                    html2 = page_soup2.find_all("a", {"style": "color: #ff3300;"})
+                    url3 = ziplink  # "https://www.baiscopelk.com/Downloads/scooby-doo-the-sword-and-the-scoob-2021-1-zip/ (C) Copyright (R) GH0$TH4CKR"
+                    r3 = requests.get(url3)
+                    if r3.status_code == 200:
+                        sv = urldecode(linkl[n - 1]) + ".zip"
+                        file = open(sv, "wb")
+                        file.write(r3.content)
+                        file.close()
+                        print("File download success !")
+                        doc = open(sv, 'rb')
+                        caption = str(sv)
+                        bot.send_document(channel_username, doc, caption=caption)
+                        print(sv, "Send file")
+
+                        doc.close()
+                        try:
+                            os.remove(sv)
+                            print("Downloaded File Removed")
+                            count = count + 1
+                        except:
+                            print("File Was removed")
+                    else:
+                        print("Something went wrong !  Error code ", r3.status_code)
+                        fE = open("errors.txt", "a")
+                        fE.write("Error code " + str(r3.status_code) + "\n")
+                        fE.close()
+                        bot.send_message(user_id, "Something went wrong !\nError code " + str(
+                            r3.status_code) + "\n")
+                except Exception as a :
+                    sv = urldecode(linkl[n - 1]) + ".zip File is missing"
+                    bot.send_message(user_id, str(sv))
             bot.send_message(user_id, "Dounloaded Count : " + str(count))
+
     except Exception as e:
         bot.send_message(user_id, "Error : " + str(e))
+@bot.message_handler(commands=['start'])
+def start(message):
+    user_id = message.chat.id
+    url0 = "https://www.baiscopelk.com/category/සිංහල-උපසිරැසි/චිත්%e2%80%8dරපටි/page/"
+    subdownloader(46,398,url0,"@uchksdhgckuds",user_id)
+#    url10 = "https://www.baiscopelk.com/category/tv/page/"
+#    subdownloader(1, 501, url10, "@uchksdhgckuds", user_id)
+
 bot.polling()
