@@ -2,25 +2,27 @@ import requests, bs4, time, os
 from colorama import Fore, init
 from bs4 import BeautifulSoup as bSoup
 import telebot
+
 Download_from = ""
 TOKEN = "2041643747:AAHR4SIb68XwULgASf1RfU-BQocjNDsCx7k"
 bot = telebot.TeleBot(TOKEN)
 import urllib.parse
 
+
 def urlencode(str):
-  return urllib.parse.quote(str)
+    return urllib.parse.quote(str)
 
 
 def urldecode(str):
-  return urllib.parse.unquote(str)
+    return urllib.parse.unquote(str)
 
-def subdownloader(start,end,url0,channel_username,user_id):
-   count = 0
+
+def subdownloader(start, end, url0, channel_username, user_id):
     try:
-        for sphrase in range(start, end+1):
-            bot.send_message(user_id, "page No : "+str(sphrase))
-          
+        count = 0
+        for sphrase in range(start, end + 1):
             url1 = str(url0) + str(sphrase) + "/"
+            bot.send_message(user_id, "page No : " + str(sphrase))
             r1 = requests.get(url1)
             print(r1)
 
@@ -67,7 +69,7 @@ def subdownloader(start,end,url0,channel_username,user_id):
                 print("\nYou choosed >> ", linkl[n - 1])
 
                 url2 = links[n - 1]
-                try :
+                try:
                     r2 = requests.get(url2)
                     data2 = r2.text
                     page_soup2 = bSoup(data2, "html.parser")
@@ -102,18 +104,22 @@ def subdownloader(start,end,url0,channel_username,user_id):
                         fE.close()
                         bot.send_message(user_id, "Something went wrong !\nError code " + str(
                             r3.status_code) + "\n")
-                except Exception as a :
+                except Exception as a:
                     sv = urldecode(linkl[n - 1]) + ".zip File is missing"
                     bot.send_message(user_id, str(sv))
-            bot.send_message(user_id, "Download Count: " + str(count))
+            bot.send_message(user_id, "Dounloaded Count : " + str(count))
 
     except Exception as e:
         bot.send_message(user_id, "Error : " + str(e))
+
+
 @bot.message_handler(commands=['start'])
 def start(message):
     user_id = message.chat.id
     url0 = "https://www.baiscopelk.com/category/සිංහල-උපසිරැසි/චිත්%e2%80%8dරපටි/page/"
-    subdownloader(46,398,url0,"@uchksdhgckuds",user_id)
+    subdownloader(46, 398, url0, "@uchksdhgckuds", user_id)
+
+
 #    url10 = "https://www.baiscopelk.com/category/tv/page/"
 #    subdownloader(1, 501, url10, "@uchksdhgckuds", user_id)
 
