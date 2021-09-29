@@ -97,7 +97,7 @@ def subdownloader(start, end, url0, channel_username, user_id):
                             count = count + 1
                         except:
                             print("File Was removed")
-                        time.sleep(3)
+                        time.sleep(1.5)
                     else:
                         print("Something went wrong !  Error code ", r3.status_code)
                         fE = open("errors.txt", "a")
@@ -117,8 +117,8 @@ def subdownloader(start, end, url0, channel_username, user_id):
 @bot.message_handler(commands=['start'])
 def start(message):
     user_id = message.chat.id
-    url0 = "https://www.baiscopelk.com/category/සිංහල-උපසිරැසි/චිත්%e2%80%8dරපටි/page/"
-    subdownloader(1, 398, url0, "@dfdvdvfdfdv", user_id)
+    url0 = "https://www.baiscopelk.com/category/tv/page/"
+    subdownloader(1, 501, url0, "@ffftujhy", user_id)
 
 
 #    url10 = "https://www.baiscopelk.com/category/tv/page/"
