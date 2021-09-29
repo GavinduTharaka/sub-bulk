@@ -97,7 +97,7 @@ def subdownloader(start, end, url0, channel_username, user_id):
                             count = count + 1
                         except:
                             print("File Was removed")
-                        time.sleep(1.5)
+                        time.sleep(2)
                     else:
                         print("Something went wrong !  Error code ", r3.status_code)
                         fE = open("errors.txt", "a")
